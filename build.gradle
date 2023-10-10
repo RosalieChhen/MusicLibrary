@@ -1,0 +1,47 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.3'
+	id 'io.spring.dependency-management' version '1.1.3'
+}
+
+group = 'com.training'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Java Persistence API => now called Jakarta, @Entity
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// Rest api calls, @RestController
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Lombok
+	implementation 'org.projectlombok:lombok:1.18.26'
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+	// h2 database
+	runtimeOnly 'com.h2database:h2'
+
+	// JWT, Spring boot security
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	implementation 'org.springframework.boot:spring-boot-starter-security:3.1.2'
+	implementation 'org.springframework.boot:spring-boot-starter-validation:3.1.2'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
