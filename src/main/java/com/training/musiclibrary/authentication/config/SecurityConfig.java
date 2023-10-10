@@ -29,7 +29,8 @@ public class SecurityConfig {
                         AntPathRequestMatcher.antMatcher("/h2-console/**"),
                         AntPathRequestMatcher.antMatcher("/auth/login"),
                         AntPathRequestMatcher.antMatcher("/auth/register"),
-                        AntPathRequestMatcher.antMatcher("/songs/**")
+                        AntPathRequestMatcher.antMatcher("/songs/**"),
+                        AntPathRequestMatcher.antMatcher("/users/**")
                         //AntPathRequestMatcher.antMatcher("/songs"),
                 )
                 .permitAll()
@@ -57,7 +58,8 @@ public class SecurityConfig {
                 AntPathRequestMatcher.antMatcher("/auth/login"),
                 AntPathRequestMatcher.antMatcher("/auth/register"),
                 AntPathRequestMatcher.antMatcher("/songs"),
-                AntPathRequestMatcher.antMatcher("/songs/**")
+                AntPathRequestMatcher.antMatcher("/songs/**"),
+                AntPathRequestMatcher.antMatcher("/users/**")
         ));
 
 

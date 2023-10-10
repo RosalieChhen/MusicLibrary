@@ -12,6 +12,8 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,7 +38,7 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userRepository.findAllActiveUsers();
     }
 
     public User findById(Long id) {
@@ -44,7 +46,9 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> searchUser(UserSearchFilterRequest searchFilter) {
-        List<User> users = userRepository.findAll();
+
+        List<User> users = userRepository.findAllActiveUsers();
+
         if(!StringUtils.isNullOrBlank(searchFilter.getUsername())) {
             final String usernameFilter = searchFilter.getUsername().toLowerCase();
             users = users.stream()
@@ -56,12 +60,23 @@ public class UserService implements UserDetailsService {
 
     public void deleteUserById(Long id) {
 
-        Optional<User> user = userRepository.findById(id);
+        User userToDelete = userRepository.findById(id).orElse(null);
 
-        if(user.isPresent()) {
-            user.get().setDeleted(true);
-        } else {
+        // Get current logged in user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> currentUser = userRepository.findByUsername(authentication.getName()); // Front have to manage
+
+
+        if(userToDelete == null) {
             throw new RuntimeException("User does not exist");
         }
+
+        if(currentUser.isPresent() && userToDelete.equals(currentUser)) {
+            throw new RuntimeException("Current User can not delete themselves");
+        }
+
+        userToDelete.setDeleted(true);
+        userRepository.save(userToDelete);
+
     }
 }
