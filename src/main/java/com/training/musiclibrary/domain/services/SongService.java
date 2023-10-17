@@ -37,7 +37,7 @@ public class SongService {
         return songRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    // What to return ? songId, song entity, ... ?
+    // QUESTION : What to return ? songId, song entity, ... ?
     public Song saveSong(SongRequest songRequest ) throws FileUploadException {
 
         // Create an AudioFile entity and save it
@@ -45,7 +45,7 @@ public class SongService {
 
         // Get current logged in user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByUsername(authentication.getName()).orElse(null); // Front have to manage
+        User user = userRepository.findByUsername(authentication.getName()).orElse(null); // Front have to manage, question ?
 
         // Create a Song entity, associate it to the audioFile and user and save the new song
         Song newSong = new Song(
@@ -68,7 +68,6 @@ public class SongService {
         return song.getAudioFile().getContent();
     }
 
-    // implements AND between criterias
     public List<Song> searchSongs(SongSearchFilterRequest searchFilter) {
 
         List<Song> songs = songRepository.findAll();

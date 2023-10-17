@@ -27,7 +27,7 @@ public class AuthenticationService {
                 registerRequest.getUsername(),
                 passwordEncoder.encode(registerRequest.getPassword()),
                 registerRequest.getEmail(),
-                Role.ROLE_ARTIST
+                Role.ARTIST
         );
 
         userRepository.save(newUser);

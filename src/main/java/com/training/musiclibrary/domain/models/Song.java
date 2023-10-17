@@ -25,7 +25,6 @@ public class Song implements Serializable {
     @OneToOne
     private AudioFile audioFile;
 
-    // TODO add user
     public Song(String title, Genre genre, User user, AudioFile audioFile) {
         this.title = title;
         this.genre = genre;

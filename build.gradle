@@ -27,6 +27,8 @@ dependencies {
 
 	// Lombok
 	implementation 'org.projectlombok:lombok:1.18.26'
+	testImplementation 'junit:junit:4.13.1'
+	testImplementation 'junit:junit:4.13.1'
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
@@ -40,6 +42,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security:3.1.2'
 	implementation 'org.springframework.boot:spring-boot-starter-validation:3.1.2'
 
+	// Swagger documentation
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 }
 
 tasks.named('test') {

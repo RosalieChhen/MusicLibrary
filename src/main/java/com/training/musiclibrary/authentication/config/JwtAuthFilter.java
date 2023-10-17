@@ -35,7 +35,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         final String jwt;
         final String username;
 
-        // If header is does not have tokem, continue to apply next filter
+        // If header is does not have token, continue to apply next filter
         if(authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain. doFilter(request, response);
             return;
