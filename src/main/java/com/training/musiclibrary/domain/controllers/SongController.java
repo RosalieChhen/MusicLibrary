@@ -29,7 +29,9 @@ public class SongController {
     @GetMapping()
     public ResponseEntity<List<Song>> getAllSongs() {
         return new ResponseEntity<>(songService.findAll(), HttpStatus.OK);
+        //return ResponseEntity.ok(); // named constructor, permet de controler la façon de créer des objets
     }
+    // better use ResponseEntity.ok() => lisible
 
     @Operation(summary = "Get a song by id")
     @ApiResponse(responseCode = "200", description = "Successful retrieval of the song")
@@ -37,6 +39,8 @@ public class SongController {
     public ResponseEntity<Song> getSongById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(songService.findById(id), HttpStatus.OK);
     }
+    // Return SongDTO => to map between db and api, découple les objets (regarder quand est-ce qu'ils changent)
+
 
     @Operation(summary = "Download the audio file of a song by id")
     @ApiResponse(responseCode = "200", description = "Successful download of the audio file")

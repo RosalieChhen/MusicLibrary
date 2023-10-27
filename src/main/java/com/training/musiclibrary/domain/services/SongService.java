@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class SongService {
+public class SongService { // stateless
 
     private final SongRepository songRepository;
     private final AudioFileService audioFileService;
