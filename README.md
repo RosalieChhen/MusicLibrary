@@ -1,6 +1,6 @@
 # Music Library
 
-*RESTful API* of a simple Music Library application implemented with Spring Boot 3 and Spring Security 6.
+*RESTful API* of a basic Music Library application implemented with Spring Boot 3 and Spring Security 6.
 
 ## Description
 
