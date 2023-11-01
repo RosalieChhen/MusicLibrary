@@ -37,6 +37,8 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
+    public User findByUsername(String username) { return userRepository.findByUsername(username).orElseThrow(EntityNotFoundException::new);}
+
     public List<User> findAll() {
         return userRepository.findAllActiveUsers();
     }

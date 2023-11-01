@@ -26,6 +26,13 @@ public class UserController {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
+    @Operation(summary = "Get a user by username")
+    @ApiResponse(responseCode = "200", description = "Successful retrieval of the user")
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        return new ResponseEntity<>(userService.findByUsername(username), HttpStatus.OK);
+    }
+
     @Operation(summary = "Get a user by id")
     @ApiResponse(responseCode = "200", description = "Successful retrieval of the user")
     @GetMapping("/{id}")
